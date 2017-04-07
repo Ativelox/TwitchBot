@@ -9,7 +9,7 @@ import javax.swing.JTextArea;
  * @author Julian <juliantischner27@web.de>
  *
  */
-public class ChatArea extends JTextArea{
+public class ChatArea extends JTextArea {
 
 	/**
 	 * 
@@ -20,7 +20,7 @@ public class ChatArea extends JTextArea{
 	 * 
 	 */
 	public ChatArea() {
-		super(1,  1);
+		super(1, 1);
 		this.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 	}
 

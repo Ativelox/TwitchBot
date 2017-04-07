@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public class SettingsProvider {
 
+	private static final String KEY_IDENTIFIER_CLIENT_ID = "CLIENT_ID";
 	private static final String KEY_IDENTIFIER_PASSWORD = "PASS";
 	private static final String KEY_IDENTIFIER_USERNAME = "NICK";
-	private static final String KEY_IDENTIFIER_CLIENT_ID = "CLIENT_ID";
 
 	private final HashMap<String, String> settingsStore;
 
@@ -25,6 +25,11 @@ public class SettingsProvider {
 
 	public Map<String, String> getAllSettings() {
 		return Collections.unmodifiableMap(this.settingsStore);
+
+	}
+
+	public String getClientID() {
+		return this.getSetting(KEY_IDENTIFIER_CLIENT_ID);
 
 	}
 
@@ -38,11 +43,6 @@ public class SettingsProvider {
 
 	public String getUsername() {
 		return this.getSetting(KEY_IDENTIFIER_USERNAME);
-	}
-	
-	public String getClientID(){
-		return this.getSetting(KEY_IDENTIFIER_CLIENT_ID);
-		
 	}
 
 	public void setSetting(final String key, final String value) {

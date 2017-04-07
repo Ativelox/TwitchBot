@@ -34,32 +34,32 @@ public class Utils {
 	private static String getDay(int numberOfDay) {
 		if (numberOfDay == 1) {
 			return "Monday";
-			
+
 		} else if (numberOfDay == 2) {
 			return "Tuesday";
-			
+
 		} else if (numberOfDay == 3) {
 			return "Wednesday";
-			
+
 		} else if (numberOfDay == 4) {
 			return "Thursday";
-			
+
 		} else if (numberOfDay == 5) {
 			return "Friday";
-			
+
 		} else if (numberOfDay == 6) {
 			return "Saturday";
-			
+
 		} else if (numberOfDay == 7) {
 			return "Sunday";
-			
-		} else{
+
+		} else {
 			throw new AssertionError();
 		}
 
 	}
 
-	private Utils(){
+	private Utils() {
 	}
 
 }

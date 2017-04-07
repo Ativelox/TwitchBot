@@ -9,7 +9,7 @@ import javax.swing.JTextArea;
  * @author Julian <juliantischner27@web.de>
  *
  */
-public class RawMessageArea extends JTextArea{
+public class RawMessageArea extends JTextArea {
 
 	/**
 	 * 

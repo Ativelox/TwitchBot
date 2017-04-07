@@ -45,7 +45,7 @@ public class Settings {
 
 		} catch (IOException e) {
 			e.printStackTrace();
-			
+
 		}
 
 	}
@@ -61,21 +61,21 @@ public class Settings {
 		try {
 			target = new FileOutputStream(new File(FILE_PATH));
 			properties.store(target, FILE_COMMENT);
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 
 		} finally {
 			try {
-				if(target != null){
+				if (target != null) {
 					target.close();
 				}
-				
+
 			} catch (IOException e) {
 				e.printStackTrace();
-				
+
 			}
-				
+
 		}
 	}
 

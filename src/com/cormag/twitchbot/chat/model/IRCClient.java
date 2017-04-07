@@ -22,9 +22,9 @@ public class IRCClient {
 
 	public String currentChannelName = null;
 
-	private LinkedList<String> protocolToAdd;
-	
 	private LinkedList<String> protocol;
+
+	private LinkedList<String> protocolToAdd;
 	/**
 	 * A BufferedReader being able to read characters from the sockets input
 	 * stream.
@@ -168,6 +168,49 @@ public class IRCClient {
 	}
 
 	/**
+	 * 
+	 */
+	public void logToFile(boolean log) {
+		if (!log) {
+			return;
+		}
+
+		BufferedWriter bw = null;
+
+		try {
+			bw = new BufferedWriter(new FileWriter(FILE_NAME));
+
+			bw.write("Protocol Start: " + Utils.getDate() + System.lineSeparator() + System.lineSeparator());
+
+			while (!this.protocol.isEmpty()) {
+				bw.write(this.protocol.pollLast());
+
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if (bw != null) {
+					bw.close();
+
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+	}
+
+	public String pollFirst() {
+		String line = this.protocolToAdd.pollFirst();
+		protocol.addFirst(line);
+		return line;
+	}
+
+	/**
 	 * Reads lines from the input stream of the socket.
 	 * 
 	 * @return LinkedList&ltString&gt: The lines read.
@@ -236,49 +279,6 @@ public class IRCClient {
 		}
 
 		protocolToAdd.add(Utils.getTimestamp() + " " + line + System.lineSeparator());
-	}
-
-	/**
-	 * 
-	 */
-	public void logToFile(boolean log) {
-		if (!log) {
-			return;
-		}
-		
-		BufferedWriter bw = null;
-
-		try {
-			bw = new BufferedWriter(new FileWriter(FILE_NAME));
-			
-			bw.write("Protocol Start: " + Utils.getDate() + System.lineSeparator() + System.lineSeparator());
-			
-			while(!this.protocol.isEmpty()){
-				bw.write(this.protocol.pollLast());
-				
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-
-		} finally {
-			try {
-				if (bw != null) {
-					bw.close();
-	
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-		}
-
-	}
-
-	public String pollFirst() {
-		String line = this.protocolToAdd.pollFirst();
-		protocol.addFirst(line);
-		return line;
 	}
 
 	private void pingRespond() {

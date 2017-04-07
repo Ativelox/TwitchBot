@@ -25,14 +25,14 @@ import com.cormag.twitchbot.settings.SettingsProvider;
 public class ChatController {
 
 	private Bot bot;
+	private boolean logToFile = true;
 	private LinkedList<String> messagesToSend;
 	private IRCClient model;
-	private boolean reactAsBot = true;
 
+	private boolean reactAsBot = true;
 	private boolean stop = false;
 	private boolean trollMatti = false;
 	private boolean trollPaul = false;
-	private boolean logToFile = true;
 
 	private MainView view;
 
@@ -146,6 +146,14 @@ public class ChatController {
 		model.disconnect();
 	}
 
+	public boolean getLogToFile() {
+		return this.logToFile;
+	}
+
+	public void setLogToFile(boolean log) {
+		this.logToFile = log;
+	}
+
 	public void setReactAsBot(boolean reactAsBot) {
 		this.reactAsBot = reactAsBot;
 	}
@@ -161,13 +169,5 @@ public class ChatController {
 	public void setTrollPaul(boolean trollPaul) {
 		this.trollPaul = trollPaul;
 
-	}
-
-	public boolean getLogToFile() {
-		return this.logToFile;
-	}
-
-	public void setLogToFile(boolean log) {
-		this.logToFile = log;
 	}
 }
