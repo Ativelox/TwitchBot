@@ -64,15 +64,6 @@ public class ChatController {
 
 		model.connect();
 		model.logOn(settingsProvider.getUsername(), settingsProvider.getPassword());
-		model.joinChannel("skumbagcormag");
-
-		bot.setCurrentChannel("skumbagcormag");
-
-		messagesToSend.add("PogChamp");
-		messagesToSend.add("PogChamp PogChamp");
-		messagesToSend.add("PogChamp PogChamp PogChamp");
-		messagesToSend.add("PogChamp PogChamp");
-		messagesToSend.add("PogChamp");
 
 		while (!stop) {
 

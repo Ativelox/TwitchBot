@@ -9,6 +9,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Map.Entry;
+
+import javax.swing.JOptionPane;
+
 import java.util.Properties;
 
 /**
@@ -35,6 +38,14 @@ public class Settings {
 			} catch (FileNotFoundException e) {
 				this.saveSettings(mProvider);
 				properties.load(new FileInputStream(FILE_PATH));
+				
+				String username = JOptionPane.showInputDialog("Enter your twitch username.").toLowerCase();
+				String password = JOptionPane.showInputDialog("Enter your auth key.");
+				String clientID =  JOptionPane.showInputDialog("Enter your Client ID.");
+				
+				mProvider.setSetting("NICK", username);
+				mProvider.setSetting("PASS", password);
+				mProvider.setSetting("CLIENT_ID", clientID);
 
 			}
 
