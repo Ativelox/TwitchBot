@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
-import com.cormag.twitchbot.api.devapp.CormagBot;
+import com.cormag.twitchbot.api.devapp.Bot;
 import com.cormag.twitchbot.chat.model.IRCClient;
 
 /**
@@ -18,11 +18,11 @@ import com.cormag.twitchbot.chat.model.IRCClient;
  */
 public class MyActionListener implements ActionListener{
 
-	private CormagBot bot;
+	private Bot bot;
 	private IRCClient model;
 	private String selectedChannel;
 	
-	public MyActionListener(final IRCClient mModel,final CormagBot mBot) {
+	public MyActionListener(final IRCClient mModel,final Bot mBot) {
 		bot = mBot;
 		model = mModel;
 		selectedChannel = null;

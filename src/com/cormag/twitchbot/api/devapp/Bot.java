@@ -13,13 +13,13 @@ import com.mb3364.twitch.api.resources.ChannelsResource;
  * @author Julian <juliantischner27@web.de>
  *
  */
-public class CormagBot {
+public class Bot {
 	
 	private Channel channel;
 	private ChannelsResource channels;
 	private Twitch twitch;
 	
-	public CormagBot(SettingsProvider settingsProvider) {
+	public Bot(SettingsProvider settingsProvider) {
 		twitch = new Twitch();
 		twitch.setClientId(settingsProvider.getClientID());
 		channels = twitch.channels();

@@ -3,7 +3,7 @@
  */
 package com.cormag.twitchbot.core;
 
-import com.cormag.twitchbot.api.devapp.CormagBot;
+import com.cormag.twitchbot.api.devapp.Bot;
 import com.cormag.twitchbot.chat.controller.ChatController;
 import com.cormag.twitchbot.settings.Settings;
 import com.cormag.twitchbot.settings.SettingsProvider;
@@ -21,7 +21,7 @@ public class Launcher {
 		
 		settings.loadSettings(settingsProvider);
 		
-		new ChatController(new CormagBot(settingsProvider), settings, settingsProvider);
+		new ChatController(new Bot(settingsProvider), settings, settingsProvider);
 		
 	}
 

@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.cormag.twitchbot.api.devapp.CormagBot;
+import com.cormag.twitchbot.api.devapp.Bot;
 import com.cormag.twitchbot.chat.controller.listeners.CheckListener;
 import com.cormag.twitchbot.chat.controller.listeners.FireKeyListener;
 import com.cormag.twitchbot.chat.controller.listeners.MyActionListener;
@@ -24,7 +24,7 @@ import com.cormag.twitchbot.settings.SettingsProvider;
  */
 public class ChatController {
 
-	private CormagBot bot;
+	private Bot bot;
 	private LinkedList<String> messagesToSend;
 	private IRCClient model;
 	private boolean reactAsBot = true;
@@ -36,7 +36,7 @@ public class ChatController {
 
 	private MainView view;
 
-	public ChatController(CormagBot mBot, Settings settings, SettingsProvider settingsProvider) {
+	public ChatController(Bot mBot, Settings settings, SettingsProvider settingsProvider) {
 
 		Pattern p = Pattern.compile(Utils.MESSAGE_REGEX);
 
