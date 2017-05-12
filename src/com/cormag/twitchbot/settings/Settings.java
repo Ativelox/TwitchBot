@@ -26,30 +26,31 @@ public class Settings {
 	private final Properties properties;
 
 	public Settings() {
-		properties = new Properties();
+		this.properties = new Properties();
 
 	}
 
+	@SuppressWarnings("resource")
 	public void loadSettings(SettingsProvider mProvider) {
 		try {
 			try {
-				properties.load(new FileInputStream(FILE_PATH));
+				this.properties.load(new FileInputStream(FILE_PATH));
 
 			} catch (FileNotFoundException e) {
 				this.saveSettings(mProvider);
-				properties.load(new FileInputStream(FILE_PATH));
-				
+				this.properties.load(new FileInputStream(FILE_PATH));
+
 				String username = JOptionPane.showInputDialog("Enter your twitch username.").toLowerCase();
 				String password = JOptionPane.showInputDialog("Enter your auth key.");
-				String clientID =  JOptionPane.showInputDialog("Enter your Client ID.");
-				
+				String clientID = JOptionPane.showInputDialog("Enter your Client ID.");
+
 				mProvider.setSetting("NICK", username);
 				mProvider.setSetting("PASS", password);
 				mProvider.setSetting("CLIENT_ID", clientID);
 
 			}
 
-			for (Entry<Object, Object> entry : properties.entrySet()) {
+			for (Entry<Object, Object> entry : this.properties.entrySet()) {
 				mProvider.setSetting((String) entry.getKey(), (String) entry.getValue());
 
 			}
@@ -62,16 +63,17 @@ public class Settings {
 	}
 
 	public void saveSettings(SettingsProvider mProvider) {
+		@SuppressWarnings("resource")
 		FileOutputStream target = null;
 
 		for (Entry<String, String> entry : mProvider.getAllSettings().entrySet()) {
-			properties.put(entry.getKey(), entry.getValue());
+			this.properties.put(entry.getKey(), entry.getValue());
 
 		}
 
 		try {
 			target = new FileOutputStream(new File(FILE_PATH));
-			properties.store(target, FILE_COMMENT);
+			this.properties.store(target, FILE_COMMENT);
 
 		} catch (IOException e) {
 			e.printStackTrace();

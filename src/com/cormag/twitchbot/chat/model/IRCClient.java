@@ -44,8 +44,8 @@ public class IRCClient {
 	 * to the twitchs' chat interface.
 	 */
 	public IRCClient() {
-		protocolToAdd = new LinkedList<String>();
-		protocol = new LinkedList<>();
+		this.protocolToAdd = new LinkedList<>();
+		this.protocol = new LinkedList<>();
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class IRCClient {
 	 */
 	public void connect() {
 		try {
-			socket = new Socket(IRCServer.URL, IRCServer.PORT);
+			this.socket = new Socket(IRCServer.URL, IRCServer.PORT);
 
 		} catch (UnknownHostException e) {
 			System.err.println(
@@ -79,7 +79,7 @@ public class IRCClient {
 		boolean socketClosed = false;
 
 		try {
-			writer.close();
+			this.writer.close();
 			writerClosed = true;
 
 		} catch (IOException e) {
@@ -87,14 +87,14 @@ public class IRCClient {
 		}
 
 		try {
-			reader.close();
+			this.reader.close();
 			readerClosed = true;
 
 		} catch (IOException e) {
 			System.err.println("An I/O Exception occured while trying to close the reader.");
 		}
 		try {
-			socket.close();
+			this.socket.close();
 			socketClosed = true;
 
 		} catch (IOException e) {
@@ -123,8 +123,8 @@ public class IRCClient {
 	}
 
 	public void leaveChannel() {
-		if (currentChannelName != null) {
-			this.sendRawMessageToServer("PART #" + currentChannelName);
+		if (this.currentChannelName != null) {
+			this.sendRawMessageToServer("PART #" + this.currentChannelName);
 		}
 	}
 
@@ -142,7 +142,7 @@ public class IRCClient {
 		boolean writerSucceed = false, readerSucceed = false;
 
 		try {
-			writer = new OutputStreamWriter(socket.getOutputStream());
+			this.writer = new OutputStreamWriter(this.socket.getOutputStream());
 			writerSucceed = true;
 
 		} catch (IOException e) {
@@ -150,7 +150,7 @@ public class IRCClient {
 					.println("An I/O Exception occured while trying to create a writer to the sockets output stream.");
 		}
 		try {
-			reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			this.reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 			readerSucceed = true;
 
 		} catch (IOException e) {
@@ -175,38 +175,39 @@ public class IRCClient {
 			return;
 		}
 
-		BufferedWriter bw = null;
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME))) {
 
-		try {
-			bw = new BufferedWriter(new FileWriter(FILE_NAME));
-
-			bw.write("Protocol Start: " + Utils.getDate() + System.lineSeparator() + System.lineSeparator());
-
-			while (!this.protocol.isEmpty()) {
-				bw.write(this.protocol.pollLast());
-
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-
-		} finally {
 			try {
-				if (bw != null) {
-					bw.close();
+
+				bw.write("Protocol Start: " + Utils.getDate() + System.lineSeparator() + System.lineSeparator());
+
+				while (!this.protocol.isEmpty()) {
+					bw.write(this.protocol.pollLast());
 
 				}
+
 			} catch (IOException e) {
 				e.printStackTrace();
+
+			} finally {
+				try {
+					bw.close();
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+					
+				}
 			}
 
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
-
 	}
 
 	public String pollFirst() {
 		String line = this.protocolToAdd.pollFirst();
-		protocol.addFirst(line);
+		this.protocol.addFirst(line);
 		return line;
 	}
 
@@ -218,11 +219,11 @@ public class IRCClient {
 	public LinkedList<String> readServerMessages() {
 
 		String line = null;
-		LinkedList<String> answer = new LinkedList<String>();
+		LinkedList<String> answer = new LinkedList<>();
 
 		try {
-			while (reader.ready()) {
-				line = reader.readLine();
+			while (this.reader.ready()) {
+				line = this.reader.readLine();
 				answer.addLast(line);
 
 				this.addToProtocol("SERVER: " + line);
@@ -245,7 +246,7 @@ public class IRCClient {
 	}
 
 	public void sendMessageToChat(String text) {
-		sendRawMessageToServer("PRIVMSG #" + currentChannelName + " :" + text);
+		sendRawMessageToServer("PRIVMSG #" + this.currentChannelName + " :" + text);
 	}
 
 	/**
@@ -259,8 +260,8 @@ public class IRCClient {
 	 */
 	public boolean sendRawMessageToServer(String line) {
 		try {
-			writer.write(line + System.lineSeparator());
-			writer.flush();
+			this.writer.write(line + System.lineSeparator());
+			this.writer.flush();
 			this.addToProtocol("CLIENT: " + line);
 			return true;
 
@@ -271,14 +272,16 @@ public class IRCClient {
 		}
 	}
 
-	private void addToProtocol(String line) {
+	private void addToProtocol(String mLine) {
+		String line = mLine;
+		
 		if (line.contains(System.lineSeparator())) {
-			line = line.replace(System.lineSeparator(), "");
+			line = mLine.replace(System.lineSeparator(), "");
 		} else if (line.contains("\n")) {
-			line = line.replaceAll("\n", "");
+			line = mLine.replaceAll("\n", "");
 		}
 
-		protocolToAdd.add(Utils.getTimestamp() + " " + line + System.lineSeparator());
+		this.protocolToAdd.add(Utils.getTimestamp() + " " + line + System.lineSeparator());
 	}
 
 	private void pingRespond() {

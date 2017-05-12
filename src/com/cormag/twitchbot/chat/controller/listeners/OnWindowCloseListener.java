@@ -25,7 +25,7 @@ public class OnWindowCloseListener implements WindowListener {
 
 	public OnWindowCloseListener(ChatController mController, IRCClient mModel, Settings mSettings,
 			SettingsProvider mProvider) {
-		controller = mController;
+		this.controller = mController;
 		this.settings = mSettings;
 		this.provider = mProvider;
 		this.model = mModel;
@@ -40,7 +40,7 @@ public class OnWindowCloseListener implements WindowListener {
 	 */
 	@Override
 	public void windowActivated(WindowEvent e) {
-
+		//
 	}
 
 	/*
@@ -51,7 +51,7 @@ public class OnWindowCloseListener implements WindowListener {
 	 */
 	@Override
 	public void windowClosed(WindowEvent e) {
-
+		//
 	}
 
 	/*
@@ -63,9 +63,9 @@ public class OnWindowCloseListener implements WindowListener {
 	@Override
 	public void windowClosing(WindowEvent e) {
 		if (e.getWindow() instanceof MainView) {
-			model.logToFile(controller.getLogToFile());
-			settings.saveSettings(provider);
-			controller.setStop(true);
+			this.model.logToFile(this.controller.getLogToFile());
+			this.settings.saveSettings(this.provider);
+			this.controller.setStop(true);
 
 			e.getWindow().dispose();
 		}
@@ -79,7 +79,7 @@ public class OnWindowCloseListener implements WindowListener {
 	 */
 	@Override
 	public void windowDeactivated(WindowEvent e) {
-
+		//
 	}
 
 	/*
@@ -90,7 +90,7 @@ public class OnWindowCloseListener implements WindowListener {
 	 */
 	@Override
 	public void windowDeiconified(WindowEvent e) {
-
+		//
 	}
 
 	/*
@@ -101,7 +101,7 @@ public class OnWindowCloseListener implements WindowListener {
 	 */
 	@Override
 	public void windowIconified(WindowEvent e) {
-
+		//
 	}
 
 	/*
@@ -112,7 +112,7 @@ public class OnWindowCloseListener implements WindowListener {
 	 */
 	@Override
 	public void windowOpened(WindowEvent e) {
-
+		//
 	}
 
 }

@@ -22,6 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.DefaultCaret;
@@ -61,13 +62,13 @@ public class MainView extends JFrame {
 	public MainView() {
 		super("CormagBot (TwitchChatBot)");
 
-		essentials = new ScreenEssentials();
+		this.essentials = new ScreenEssentials();
 
 		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.X_AXIS));
 		this.setVisible(true);
 		this.setResizable(false);
-		this.setPreferredSize(essentials.getFrameSize());
-		this.setLocation(essentials.getFrameLocation());
+		this.setPreferredSize(this.essentials.getFrameSize());
+		this.setLocation(this.essentials.getFrameLocation());
 
 		managePanels();
 		manageTextFields();
@@ -80,26 +81,26 @@ public class MainView extends JFrame {
 	}
 
 	public void appendTextToLog(String line) {
-		logArea.append(line);
+		this.logArea.append(line);
 	}
 
 	public void setActionListener(ActionListener a) {
-		joinChannelBox.addActionListener(a);
-		joinChannel.addActionListener(a);
-		leaveChannel.addActionListener(a);
+		this.joinChannelBox.addActionListener(a);
+		this.joinChannel.addActionListener(a);
+		this.leaveChannel.addActionListener(a);
 	}
 
 	public void setItemListener(ItemListener i) {
-		actAsBot.addItemListener(i);
-		trollMatti.addItemListener(i);
-		trollPaul.addItemListener(i);
-		logToFile.addItemListener(i);
+		this.actAsBot.addItemListener(i);
+		this.trollMatti.addItemListener(i);
+		this.trollPaul.addItemListener(i);
+		this.logToFile.addItemListener(i);
 
 	}
 
 	public void setKeyListener(KeyListener l) {
-		chatArea.addKeyListener(l);
-		rawMessageArea.addKeyListener(l);
+		this.chatArea.addKeyListener(l);
+		this.rawMessageArea.addKeyListener(l);
 	}
 
 	public void setWindowListener(WindowListener w) {
@@ -108,94 +109,94 @@ public class MainView extends JFrame {
 
 	private void addComponents() {
 
-		rightPanel2.add(chatAreaDescription);
-		rightPanel2.add(chatArea);
+		this.rightPanel2.add(this.chatAreaDescription);
+		this.rightPanel2.add(this.chatArea);
 
-		rightPanel3.add(rawMessageAreaDescription);
-		rightPanel3.add(rawMessageArea);
+		this.rightPanel3.add(this.rawMessageAreaDescription);
+		this.rightPanel3.add(this.rawMessageArea);
 
-		rightPanel4.add(joinChannel);
-		rightPanel4.add(joinChannelBox);
+		this.rightPanel4.add(this.joinChannel);
+		this.rightPanel4.add(this.joinChannelBox);
 
-		rightPanel5.add(leaveChannel);
+		this.rightPanel5.add(this.leaveChannel);
 
-		rightPanel6.add(actAsBot);
-		rightPanel6.add(trollPaul);
-		rightPanel6.add(trollMatti);
-		rightPanel6.add(logToFile);
+		this.rightPanel6.add(this.actAsBot);
+		this.rightPanel6.add(this.trollPaul);
+		this.rightPanel6.add(this.trollMatti);
+		this.rightPanel6.add(this.logToFile);
 
-		mainRightPanel.add(rightPanel2);
-		mainRightPanel.add(rightPanel3);
-		mainRightPanel.add(rightPanel4);
-		mainRightPanel.add(rightPanel5);
-		mainRightPanel.add(rightPanel6);
+		this.mainRightPanel.add(this.rightPanel2);
+		this.mainRightPanel.add(this.rightPanel3);
+		this.mainRightPanel.add(this.rightPanel4);
+		this.mainRightPanel.add(this.rightPanel5);
+		this.mainRightPanel.add(this.rightPanel6);
 
-		logPanel.add(scroll, BorderLayout.CENTER);
-		logPanel.add(logHeader, BorderLayout.NORTH);
+		this.logPanel.add(this.scroll, BorderLayout.CENTER);
+		this.logPanel.add(this.logHeader, BorderLayout.NORTH);
 
-		interactionPanel.add(interactionHeader, BorderLayout.NORTH);
-		interactionPanel.add(mainRightPanel, BorderLayout.CENTER);
+		this.interactionPanel.add(this.interactionHeader, BorderLayout.NORTH);
+		this.interactionPanel.add(this.mainRightPanel, BorderLayout.CENTER);
 
-		this.add(logPanel);
+		this.add(this.logPanel);
 		this.add(new JSeparator(SwingConstants.VERTICAL));
-		this.add(interactionPanel);
+		this.add(this.interactionPanel);
 
 	}
 
 	private void manageButtons() {
-		joinChannel = new JButton("Join Channel");
-		joinChannel.setPreferredSize(
-				new Dimension(chatAreaDescription.getPreferredSize().width, joinChannel.getPreferredSize().height));
-		joinChannel.setBorder(BorderFactory.createBevelBorder(1));
+		this.joinChannel = new JButton("Join Channel");
+		this.joinChannel.setPreferredSize(
+				new Dimension(this.chatAreaDescription.getPreferredSize().width, this.joinChannel.getPreferredSize().height));
+		this.joinChannel.setBorder(BorderFactory.createBevelBorder(1));
 
-		leaveChannel = new JButton("Leave Channel");
-		leaveChannel.setPreferredSize(
-				new Dimension(chatAreaDescription.getPreferredSize().width, joinChannel.getPreferredSize().height));
-		leaveChannel.setBorder(BorderFactory.createBevelBorder(1));
+		this.leaveChannel = new JButton("Leave Channel");
+		this.leaveChannel.setPreferredSize(
+				new Dimension(this.chatAreaDescription.getPreferredSize().width, this.joinChannel.getPreferredSize().height));
+		this.leaveChannel.setBorder(BorderFactory.createBevelBorder(1));
 
-		actAsBot = new JCheckBox("React to !");
-		actAsBot.setSelected(true);
+		this.actAsBot = new JCheckBox("React to !");
+		this.actAsBot.setSelected(true);
 
-		trollPaul = new JCheckBox("Copy Swaul");
-		trollPaul.setSelected(false);
+		this.trollPaul = new JCheckBox("Copy Swaul");
+		this.trollPaul.setSelected(false);
 
-		trollMatti = new JCheckBox("Copy GeniusMatti");
-		trollMatti.setSelected(false);
+		this.trollMatti = new JCheckBox("Copy GeniusMatti");
+		this.trollMatti.setSelected(false);
 
-		logToFile = new JCheckBox("Log To File");
-		logToFile.setSelected(true);
+		this.logToFile = new JCheckBox("Log To File");
+		this.logToFile.setSelected(true);
 
 	}
 
 	private void managePanels() {
-		logPanel = new JPanel();
-		interactionPanel = new JPanel();
-		logPanel.setPreferredSize(new Dimension(essentials.getFrameSize().width / 2, essentials.getFrameSize().height));
+		this.logPanel = new JPanel();
+		this.interactionPanel = new JPanel();
+		this.logPanel.setPreferredSize(new Dimension(this.essentials.getFrameSize().width / 2, this.essentials.getFrameSize().height));
 
-		mainRightPanel = new JPanel();
-		rightPanel2 = new JPanel();
-		rightPanel3 = new JPanel();
-		rightPanel4 = new JPanel();
-		rightPanel5 = new JPanel();
-		rightPanel6 = new JPanel();
+		this.mainRightPanel = new JPanel();
+		this.rightPanel2 = new JPanel();
+		this.rightPanel3 = new JPanel();
+		this.rightPanel4 = new JPanel();
+		this.rightPanel5 = new JPanel();
+		this.rightPanel6 = new JPanel();
 
-		logPanel.setLayout(new BorderLayout());
-		logPanel.setBorder(new EmptyBorder(10, 30, 30, 30));
+		this.logPanel.setLayout(new BorderLayout());
+		this.logPanel.setBorder(new EmptyBorder(10, 30, 30, 30));
 
-		interactionPanel.setLayout(new BorderLayout());
-		interactionPanel.setBorder(new EmptyBorder(10, 0, 30, 30));
+		this.interactionPanel.setLayout(new BorderLayout());
+		this.interactionPanel.setBorder(new EmptyBorder(10, 0, 30, 30));
 
-		mainRightPanel.setLayout(new BoxLayout(mainRightPanel, BoxLayout.Y_AXIS));
-		mainRightPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		this.mainRightPanel.setLayout(new BoxLayout(this.mainRightPanel, BoxLayout.Y_AXIS));
+		this.mainRightPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
 		// rightPanel2.setBackground(Color.green);
-		rightPanel2.setBorder(new EmptyBorder(50, 0, -90, 0));
+		this.rightPanel2.setBorder(new EmptyBorder(50, 0, -90, 0));
 
 		// rightPanel3.setBackground(Color.ORANGE);
-		rightPanel3.setBorder(new EmptyBorder(0, 0, -140, 0));
+		this.rightPanel3.setBorder(new EmptyBorder(0, 0, -140, 0));
 
 		// rightPanel4.setBackground(Color.yellow);
-		rightPanel4.setBorder(new EmptyBorder(50, 0, -90, 0));
+		this.rightPanel4.setBorder(new EmptyBorder(50, 0, -90, 0));
 
 		// rightPanel5.setBackground(Color.CYAN);
 
@@ -204,62 +205,62 @@ public class MainView extends JFrame {
 
 	private void manageTextFields() {
 
-		chatArea = new ChatArea();
-		chatArea.setToolTipText("Message");
-		chatArea.setFont(new Font("", Font.BOLD, 15));
-		chatArea.setPreferredSize(new Dimension(essentials.getFrameSize().width / 2 - 300, 25));
-		chatArea.setBorder(BorderFactory.createBevelBorder(1));
+		this.chatArea = new ChatArea();
+		this.chatArea.setToolTipText("Message");
+		this.chatArea.setFont(new Font("", Font.BOLD, 15));
+		this.chatArea.setPreferredSize(new Dimension(this.essentials.getFrameSize().width / 2 - 300, 25));
+		this.chatArea.setBorder(BorderFactory.createBevelBorder(1));
 
-		rawMessageArea = new RawMessageArea();
-		rawMessageArea.setToolTipText("Raw Message");
-		rawMessageArea.setFont(new Font("", Font.BOLD, 15));
-		rawMessageArea.setPreferredSize(new Dimension(essentials.getFrameSize().width / 2 - 300, 25));
-		rawMessageArea.setBorder(BorderFactory.createBevelBorder(1));
+		this.rawMessageArea = new RawMessageArea();
+		this.rawMessageArea.setToolTipText("Raw Message");
+		this.rawMessageArea.setFont(new Font("", Font.BOLD, 15));
+		this.rawMessageArea.setPreferredSize(new Dimension(this.essentials.getFrameSize().width / 2 - 300, 25));
+		this.rawMessageArea.setBorder(BorderFactory.createBevelBorder(1));
 
-		logArea = new JTextArea();
-		logArea.setEditable(false);
-		logArea.setFont(new Font("arial", Font.BOLD, 12));
-		logArea.setBorder(BorderFactory.createBevelBorder(1));
+		this.logArea = new JTextArea();
+		this.logArea.setEditable(false);
+		this.logArea.setFont(new Font("arial", Font.BOLD, 12));
+		this.logArea.setBorder(BorderFactory.createBevelBorder(1));
 
-		DefaultCaret caret = (DefaultCaret) logArea.getCaret();
+		DefaultCaret caret = (DefaultCaret) this.logArea.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
-		scroll = new JScrollPane(logArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		this.scroll = new JScrollPane(this.logArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-		logHeader = new JTextField("Communication Log");
-		logHeader.setEditable(false);
-		logHeader.setFont(new Font("arial", Font.BOLD, 25));
-		logHeader.setBackground(this.getBackground());
-		logHeader.setBorder(new EmptyBorder(0, 0, 10, 0));
-		logHeader.setHorizontalAlignment(JTextField.CENTER);
+		this.logHeader = new JTextField("Communication Log");
+		this.logHeader.setEditable(false);
+		this.logHeader.setFont(new Font("arial", Font.BOLD, 25));
+		this.logHeader.setBackground(this.getBackground());
+		this.logHeader.setBorder(new EmptyBorder(0, 0, 10, 0));
+		this.logHeader.setHorizontalAlignment(SwingConstants.CENTER);
 
-		interactionHeader = new JTextField("Interaction Header");
-		interactionHeader.setEditable(false);
-		interactionHeader.setFont(new Font("arial", Font.BOLD, 25));
-		interactionHeader.setBackground(this.getBackground());
-		interactionHeader.setBorder(new EmptyBorder(0, 0, 10, 0));
-		interactionHeader.setHorizontalAlignment(JTextField.CENTER);
+		this.interactionHeader = new JTextField("Interaction Header");
+		this.interactionHeader.setEditable(false);
+		this.interactionHeader.setFont(new Font("arial", Font.BOLD, 25));
+		this.interactionHeader.setBackground(this.getBackground());
+		this.interactionHeader.setBorder(new EmptyBorder(0, 0, 10, 0));
+		this.interactionHeader.setHorizontalAlignment(SwingConstants.CENTER);
 
-		chatAreaDescription = new JTextField("Send Message:");
-		chatAreaDescription.setEditable(false);
-		chatAreaDescription.setBackground(this.getBackground());
-		chatAreaDescription.setBorder(new EmptyBorder(0, 0, 0, 130 - chatAreaDescription.getPreferredSize().width));
+		this.chatAreaDescription = new JTextField("Send Message:");
+		this.chatAreaDescription.setEditable(false);
+		this.chatAreaDescription.setBackground(this.getBackground());
+		this.chatAreaDescription.setBorder(new EmptyBorder(0, 0, 0, 130 - this.chatAreaDescription.getPreferredSize().width));
 
-		rawMessageAreaDescription = new JTextField("Send Raw Message:");
-		rawMessageAreaDescription.setEditable(false);
-		rawMessageAreaDescription.setBackground(this.getBackground());
-		rawMessageAreaDescription
-				.setBorder(new EmptyBorder(0, 0, 0, 130 - rawMessageAreaDescription.getPreferredSize().width));
+		this.rawMessageAreaDescription = new JTextField("Send Raw Message:");
+		this.rawMessageAreaDescription.setEditable(false);
+		this.rawMessageAreaDescription.setBackground(this.getBackground());
+		this.rawMessageAreaDescription
+				.setBorder(new EmptyBorder(0, 0, 0, 130 - this.rawMessageAreaDescription.getPreferredSize().width));
 
-		joinChannelBox = new JComboBox<String>();
-		joinChannelBox.setPreferredSize(new Dimension(essentials.getFrameSize().width / 2 - 300, 25));
-		joinChannelBox.setBorder(BorderFactory.createBevelBorder(1));
-		joinChannelBox.setEditable(true);
-		joinChannelBox.insertItemAt("ukogmonkey", 0);
-		joinChannelBox.insertItemAt("lobosjr", 1);
-		joinChannelBox.insertItemAt("imaqtpie", 2);
-		joinChannelBox.insertItemAt("iwilldominate", 3);
+		this.joinChannelBox = new JComboBox<>();
+		this.joinChannelBox.setPreferredSize(new Dimension(this.essentials.getFrameSize().width / 2 - 300, 25));
+		this.joinChannelBox.setBorder(BorderFactory.createBevelBorder(1));
+		this.joinChannelBox.setEditable(true);
+		this.joinChannelBox.insertItemAt("ukogmonkey", 0);
+		this.joinChannelBox.insertItemAt("lobosjr", 1);
+		this.joinChannelBox.insertItemAt("imaqtpie", 2);
+		this.joinChannelBox.insertItemAt("iwilldominate", 3);
 
 	}
 }

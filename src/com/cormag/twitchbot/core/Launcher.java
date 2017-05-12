@@ -3,8 +3,6 @@
  */
 package com.cormag.twitchbot.core;
 
-import java.util.Calendar;
-
 import com.cormag.twitchbot.api.devapp.Bot;
 import com.cormag.twitchbot.chat.controller.ChatController;
 import com.cormag.twitchbot.settings.Settings;
@@ -16,6 +14,7 @@ import com.cormag.twitchbot.settings.SettingsProvider;
  */
 public class Launcher {
 
+	@SuppressWarnings("unused")
 	public static void main(final String[] args) {
 
 		Settings settings = new Settings();

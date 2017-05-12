@@ -40,39 +40,39 @@ public class ChatController {
 
 		Pattern p = Pattern.compile(Utils.MESSAGE_REGEX);
 
-		bot = mBot;
+		this.bot = mBot;
 
-		messagesToSend = new LinkedList<String>();
+		this.messagesToSend = new LinkedList<>();
 
-		model = new IRCClient();
-		view = new MainView();
+		this.model = new IRCClient();
+		this.view = new MainView();
 
-		FireKeyListener l = new FireKeyListener(model);
-		OnWindowCloseListener w = new OnWindowCloseListener(this, model, settings, settingsProvider);
-		MyActionListener a = new MyActionListener(model, bot);
+		FireKeyListener l = new FireKeyListener(this.model);
+		OnWindowCloseListener w = new OnWindowCloseListener(this, this.model, settings, settingsProvider);
+		MyActionListener a = new MyActionListener(this.model, this.bot);
 		CheckListener i = new CheckListener(this);
 
-		view.setWindowListener(w);
+		this.view.setWindowListener(w);
 
-		view.setKeyListener(l);
+		this.view.setKeyListener(l);
 
-		view.setActionListener(a);
+		this.view.setActionListener(a);
 
-		view.setItemListener(i);
+		this.view.setItemListener(i);
 
 		// start connection
 
-		model.connect();
-		model.logOn(settingsProvider.getUsername(), settingsProvider.getPassword());
+		this.model.connect();
+		this.model.logOn(settingsProvider.getUsername(), settingsProvider.getPassword());
 
-		while (!stop) {
+		while (!this.stop) {
 
-			model.readServerMessages();
+			this.model.readServerMessages();
 
-			LinkedList<String> lines = model.getProtocol();
+			LinkedList<String> lines = this.model.getProtocol();
 			while (!lines.isEmpty()) {
 
-				String line = model.pollFirst();
+				String line = this.model.pollFirst();
 
 				Matcher m = p.matcher(line);
 
@@ -81,50 +81,50 @@ public class ChatController {
 					String name = m.group(1);
 					String message = m.group(2);
 
-					view.appendTextToLog(Utils.getTimestamp() + " " + "SERVER: ");
-					view.appendTextToLog(name + ": ");
-					view.appendTextToLog(message + System.lineSeparator());
+					this.view.appendTextToLog(Utils.getTimestamp() + " " + "SERVER: ");
+					this.view.appendTextToLog(name + ": ");
+					this.view.appendTextToLog(message + System.lineSeparator());
 
-					if (reactAsBot) {
+					if (this.reactAsBot) {
 						if (message.equals("!status")) {
-							messagesToSend.add("Current status: " + bot.getStatus());
+							this.messagesToSend.add("Current status: " + this.bot.getStatus());
 
 						} else if (message.equals("!views")) {
-							messagesToSend.add("Altogether " + bot.getViewerCount() + " channel views");
+							this.messagesToSend.add("Altogether " + this.bot.getViewerCount() + " channel views");
 
 						} else if (message.equals("!game")) {
-							messagesToSend.add("Currently playing " + bot.getCurrentGame());
+							this.messagesToSend.add("Currently playing " + this.bot.getCurrentGame());
 
 						} else if (message.equals("!delay")) {
-							messagesToSend.add("Current delay is " + bot.getDelay() + "s");
+							this.messagesToSend.add("Current delay is " + this.bot.getDelay() + "s");
 
 						} else if (message.equals("!followers")) {
-							messagesToSend.add("Follower count: " + bot.getFollowerCount());
+							this.messagesToSend.add("Follower count: " + this.bot.getFollowerCount());
 
 						}
 					}
 
-					if (trollPaul) {
+					if (this.trollPaul) {
 						if (name.equals("swaul")) {
-							messagesToSend.add(message);
+							this.messagesToSend.add(message);
 						}
 					}
 
-					if (trollMatti) {
+					if (this.trollMatti) {
 						if (name.equals("geniusmatti")) {
-							messagesToSend.add(message);
+							this.messagesToSend.add(message);
 						}
 
 					}
 
 				} else {
-					view.appendTextToLog(line);
+					this.view.appendTextToLog(line);
 				}
 
 			}
 
-			while (!messagesToSend.isEmpty()) {
-				model.sendMessageToChat(messagesToSend.pollFirst());
+			while (!this.messagesToSend.isEmpty()) {
+				this.model.sendMessageToChat(this.messagesToSend.pollFirst());
 			}
 
 			try {
@@ -134,7 +134,7 @@ public class ChatController {
 			}
 		}
 
-		model.disconnect();
+		this.model.disconnect();
 	}
 
 	public boolean getLogToFile() {
@@ -145,20 +145,20 @@ public class ChatController {
 		this.logToFile = log;
 	}
 
-	public void setReactAsBot(boolean reactAsBot) {
-		this.reactAsBot = reactAsBot;
+	public void setReactAsBot(boolean mReactAsBot) {
+		this.reactAsBot = mReactAsBot;
 	}
 
 	public void setStop(boolean mStop) {
 		this.stop = mStop;
 	}
 
-	public void setTrollMatti(boolean trollMatti) {
-		this.trollMatti = trollMatti;
+	public void setTrollMatti(boolean mTrollMatti) {
+		this.trollMatti = mTrollMatti;
 	}
 
-	public void setTrollPaul(boolean trollPaul) {
-		this.trollPaul = trollPaul;
+	public void setTrollPaul(boolean mTrollPaul) {
+		this.trollPaul = mTrollPaul;
 
 	}
 }

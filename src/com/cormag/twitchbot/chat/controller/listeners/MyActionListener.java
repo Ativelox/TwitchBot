@@ -23,9 +23,9 @@ public class MyActionListener implements ActionListener {
 	private String selectedChannel;
 
 	public MyActionListener(final IRCClient mModel, final Bot mBot) {
-		bot = mBot;
-		model = mModel;
-		selectedChannel = null;
+		this.bot = mBot;
+		this.model = mModel;
+		this.selectedChannel = null;
 	}
 
 	/*
@@ -42,15 +42,15 @@ public class MyActionListener implements ActionListener {
 			JButton button = (JButton) o;
 
 			if (button.getText().startsWith("Join")) {
-				if (selectedChannel == null) {
+				if (this.selectedChannel == null) {
 					return;
 				}
 
-				bot.setCurrentChannel(selectedChannel);
-				model.joinChannel(selectedChannel);
+				this.bot.setCurrentChannel(this.selectedChannel);
+				this.model.joinChannel(this.selectedChannel);
 
 			} else if (button.getText().startsWith("Leave")) {
-				model.leaveChannel();
+				this.model.leaveChannel();
 			}
 
 		} else if (o instanceof JComboBox) {
@@ -58,7 +58,7 @@ public class MyActionListener implements ActionListener {
 			JComboBox<String> box = (JComboBox<String>) o;
 
 			String selectedItem = (String) box.getSelectedItem();
-			selectedChannel = selectedItem;
+			this.selectedChannel = selectedItem;
 		}
 
 	}

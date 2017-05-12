@@ -15,7 +15,7 @@ public class ScreenEssentials {
 	public final Dimension screenSize;
 
 	public ScreenEssentials() {
-		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		this.screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	}
 
 	public Point getFrameLocation() {

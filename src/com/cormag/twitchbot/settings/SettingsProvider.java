@@ -20,7 +20,7 @@ public class SettingsProvider {
 	private final HashMap<String, String> settingsStore;
 
 	public SettingsProvider() {
-		settingsStore = new HashMap<>();
+		this.settingsStore = new HashMap<>();
 	}
 
 	public Map<String, String> getAllSettings() {
@@ -38,7 +38,7 @@ public class SettingsProvider {
 	}
 
 	public String getSetting(final String key) {
-		return settingsStore.get(key);
+		return this.settingsStore.get(key);
 	}
 
 	public String getUsername() {
@@ -46,7 +46,7 @@ public class SettingsProvider {
 	}
 
 	public void setSetting(final String key, final String value) {
-		settingsStore.put(key, value);
+		this.settingsStore.put(key, value);
 	}
 
 }

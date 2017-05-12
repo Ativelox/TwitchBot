@@ -15,41 +15,41 @@ import com.mb3364.twitch.api.resources.ChannelsResource;
  */
 public class Bot {
 
-	private Channel channel;
+	Channel channel;
 	private ChannelsResource channels;
 	private Twitch twitch;
 
 	public Bot(SettingsProvider settingsProvider) {
-		twitch = new Twitch();
-		twitch.setClientId(settingsProvider.getClientID());
-		channels = twitch.channels();
-		channel = null;
+		this.twitch = new Twitch();
+		this.twitch.setClientId(settingsProvider.getClientID());
+		this.channels = this.twitch.channels();
+		this.channel = null;
 	}
 
 	public String getCurrentGame() {
-		return channel.getGame();
+		return this.channel.getGame();
 
 	}
 
 	public int getDelay() {
-		return channel.getDelay();
+		return this.channel.getDelay();
 	}
 
 	public int getFollowerCount() {
-		return channel.getFollowers();
+		return this.channel.getFollowers();
 
 	}
 
 	public String getStatus() {
-		return channel.getStatus();
+		return this.channel.getStatus();
 	}
 
 	public long getViewerCount() {
-		return channel.getViews();
+		return this.channel.getViews();
 	}
 
 	public void setCurrentChannel(String channelName) {
-		channels.get(channelName, new ChannelResponseHandler() {
+		this.channels.get(channelName, new ChannelResponseHandler() {
 
 			@Override
 			public void onFailure(int arg0, String arg1, String arg2) {
@@ -65,7 +65,7 @@ public class Bot {
 
 			@Override
 			public void onSuccess(Channel arg0) {
-				channel = arg0;
+				Bot.this.channel = arg0;
 
 			}
 		});

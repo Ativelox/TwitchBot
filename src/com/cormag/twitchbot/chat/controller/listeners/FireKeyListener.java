@@ -19,7 +19,7 @@ public class FireKeyListener implements KeyListener {
 	private IRCClient model;
 
 	public FireKeyListener(IRCClient mModel) {
-		model = mModel;
+		this.model = mModel;
 
 	}
 
@@ -35,7 +35,7 @@ public class FireKeyListener implements KeyListener {
 													// the chat.
 			if (KeyEvent.VK_ENTER == arg0.getKeyCode()) {
 				ChatArea chatArea = (ChatArea) arg0.getSource();
-				model.sendMessageToChat(chatArea.getText());
+				this.model.sendMessageToChat(chatArea.getText());
 
 				chatArea.setText(null);
 			}
@@ -43,7 +43,7 @@ public class FireKeyListener implements KeyListener {
 		} else if (arg0.getSource() instanceof RawMessageArea) {
 			if (KeyEvent.VK_ENTER == arg0.getKeyCode()) {
 				RawMessageArea rawMessageArea = (RawMessageArea) arg0.getSource();
-				model.sendRawMessageToServer(rawMessageArea.getText());
+				this.model.sendRawMessageToServer(rawMessageArea.getText());
 				rawMessageArea.setText(null);
 			}
 
@@ -57,7 +57,7 @@ public class FireKeyListener implements KeyListener {
 	 */
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-
+		//
 	}
 
 	/*
@@ -67,7 +67,7 @@ public class FireKeyListener implements KeyListener {
 	 */
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-
+		//
 	}
 
 }

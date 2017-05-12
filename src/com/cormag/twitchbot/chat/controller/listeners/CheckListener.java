@@ -22,7 +22,7 @@ public class CheckListener implements ItemListener {
 	 * 
 	 */
 	public CheckListener(ChatController mController) {
-		controller = mController;
+		this.controller = mController;
 	}
 
 	/*
@@ -38,30 +38,30 @@ public class CheckListener implements ItemListener {
 
 			if (arg0.getStateChange() == ItemEvent.SELECTED) {
 				if (box.getText().contains("React")) {
-					controller.setReactAsBot(true);
+					this.controller.setReactAsBot(true);
 
 				} else if (box.getText().contains("GeniusMatti")) {
-					controller.setTrollMatti(true);
+					this.controller.setTrollMatti(true);
 
 				} else if (box.getText().contains("Swaul")) {
-					controller.setTrollPaul(true);
+					this.controller.setTrollPaul(true);
 
 				} else if (box.getText().contains("Log")) {
-					controller.setLogToFile(true);
+					this.controller.setLogToFile(true);
 
 				}
 			} else if (arg0.getStateChange() == ItemEvent.DESELECTED) {
 				if (box.getText().contains("React")) {
-					controller.setReactAsBot(false);
+					this.controller.setReactAsBot(false);
 
 				} else if (box.getText().contains("GeniusMatti")) {
-					controller.setTrollMatti(false);
+					this.controller.setTrollMatti(false);
 
 				} else if (box.getText().contains("Swaul")) {
-					controller.setTrollPaul(false);
+					this.controller.setTrollPaul(false);
 
 				} else if (box.getText().contains("Log")) {
-					controller.setLogToFile(false);
+					this.controller.setLogToFile(false);
 
 				}
 			}
